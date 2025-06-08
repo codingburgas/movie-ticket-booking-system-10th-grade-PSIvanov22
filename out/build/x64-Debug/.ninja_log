@@ -1,0 +1,11 @@
+# ninja log v5
+1	120	7711136784660349	build.ninja	68f86f306c83c64c
+25	129	7711136784660349	build.ninja	68f86f306c83c64c
+14	365	7711136788804538	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	95d4f8496acc0723
+366	515	7711136790217285	movie-ticket-booking-system-10th-grade-PSIvanov22.exe	eedec57153591635
+1	352	7711138899053657	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	95d4f8496acc0723
+353	464	7711138899834772	movie-ticket-booking-system-10th-grade-PSIvanov22.exe	eedec57153591635
+12	374	7711139758269952	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	95d4f8496acc0723
+375	458	7711139758895050	movie-ticket-booking-system-10th-grade-PSIvanov22.exe	eedec57153591635
+1	360	7711141025464594	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	95d4f8496acc0723
+361	444	7711141026089437	movie-ticket-booking-system-10th-grade-PSIvanov22.exe	eedec57153591635

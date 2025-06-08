@@ -1,0 +1,3 @@
+C:/Users/Админ/Documents/movie-ticket-booking-system-10th-grade-PSIvanov22/out/build/x64-Debug/CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir
+C:/Users/Админ/Documents/movie-ticket-booking-system-10th-grade-PSIvanov22/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Админ/Documents/movie-ticket-booking-system-10th-grade-PSIvanov22/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
