@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <algorithm>
 #include "SeatManager.h"
 
 using namespace std;
@@ -33,9 +35,19 @@ int main()
     {
         clearScreen();
         printLogo();
-        cout << "\n============ MAIN MENU ============\n";
-        cout << "0 - Exit Program\n1 - Reserve Seat\n2 - Show Seating Map\n3 - Show Revenue\n";
-        cout << "Select an option: ";
+        cout << "\n";
+
+        const int CONSOLE_WIDTH = 80;
+        string menuTitle = "============ MAIN MENU ============";
+        int menuPadding = max(0, (CONSOLE_WIDTH - (int)menuTitle.length()) / 2);
+        cout << string(menuPadding, ' ') << menuTitle << "\n";
+
+        int optionPadding = menuPadding + 4;
+        cout << string(optionPadding, ' ') << "0 - Exit Program\n";
+        cout << string(optionPadding, ' ') << "1 - Reserve Seat\n";
+        cout << string(optionPadding, ' ') << "2 - Show Seating Map\n";
+        cout << string(optionPadding, ' ') << "3 - Show Revenue\n";
+        cout << string(optionPadding, ' ') << "Select an option: ";
         cin >> userChoice;
 
         switch (userChoice)
@@ -44,6 +56,7 @@ int main()
             clearScreen();
             printLogo();
             cout << "Exiting program...\n";
+
             for (int m = 0; m < MOVIE_COUNT; ++m) {
                 for (int i = 0; i <= ROWS; ++i) {
                     delete[] allSeats[m][i];

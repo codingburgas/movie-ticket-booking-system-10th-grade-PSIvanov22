@@ -1,8 +1,8 @@
 #ifndef SEAT_MANAGER_H
 #define SEAT_MANAGER_H
 
-#define ROWS 15
-#define COLS 40
+#define ROWS 10
+#define COLS 20
 #define MOVIE_COUNT 8
 
 extern int vipCount[MOVIE_COUNT];

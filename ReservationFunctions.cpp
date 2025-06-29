@@ -2,6 +2,8 @@
 #include <iomanip>
 #include "SeatManager.h"
 
+using namespace std;
+
 int vipCount[MOVIE_COUNT] = {};
 int premiumCount[MOVIE_COUNT] = {};
 int commonCount[MOVIE_COUNT] = {};
@@ -15,8 +17,6 @@ const char* movieTimes[MOVIE_COUNT] = {
     "14:00", "16:00", "18:00", "20:00",
     "22:00", "13:00", "17:00", "11:00"
 };
-
-using namespace std;
 
 void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col)
 {
@@ -43,11 +43,11 @@ void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col)
             printLogo();
             cout << "============RESERVATION===========" << endl;
             cout << "\nSeat successfully reserved!\n\n";
-            if (row <= 5) {
+            if (row <= 3) {
                 vipCount[movieIndex]++;
                 totalRevenue[movieIndex] += 50;
             }
-            else if (row <= 10) {
+            else if (row <= 7) {
                 premiumCount[movieIndex]++;
                 totalRevenue[movieIndex] += 30;
             }
