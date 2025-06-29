@@ -1,0 +1,14 @@
+# ninja log v6
+17	472	7729241670538232	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	620a29f0c0f58ef1
+534	631	7729241675699560	movie-ticket-booking-system-10th-grade-PSIvanov22.exe	65d3f04982213e19
+21	534	7729241670568162	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/SeatManager.cpp.obj	a247b06543354b88
+5	467	7729245392017611	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	620a29f0c0f58ef1
+8	483	7729245392048851	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/DisplayFunctions.cpp.obj	7085dee5fbe28fc1
+11	523	7729245392078776	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/ReservationFunctions.cpp.obj	9eeed7358e29bb41
+18	483	7729245997995425	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	620a29f0c0f58ef1
+21	497	7729245998032163	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/DisplayFunctions.cpp.obj	7085dee5fbe28fc1
+23	537	7729245998053739	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/ReservationFunctions.cpp.obj	9eeed7358e29bb41
+17	490	7729247457220906	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/main.cpp.obj	620a29f0c0f58ef1
+20	511	7729247457251541	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/DisplayFunctions.cpp.obj	7085dee5fbe28fc1
+23	553	7729247457281462	CMakeFiles/movie-ticket-booking-system-10th-grade-PSIvanov22.dir/ReservationFunctions.cpp.obj	9eeed7358e29bb41
+553	663	7729247462586900	movie-ticket-booking-system-10th-grade-PSIvanov22.exe	d8a0be6e4769abdb

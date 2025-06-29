@@ -4,6 +4,7 @@
 using namespace std;
 
 int userChoice, movieChoice;
+int selectedRow, selectedCol;
 
 void showMovieList()
 {
@@ -17,7 +18,6 @@ void showMovieList()
 int main()
 {
     int*** allSeats = new int** [MOVIE_COUNT];
-
     for (int m = 0; m < MOVIE_COUNT; ++m)
     {
         allSeats[m] = new int* [ROWS + 1];
@@ -44,6 +44,13 @@ int main()
             clearScreen();
             printLogo();
             cout << "Exiting program...\n";
+            for (int m = 0; m < MOVIE_COUNT; ++m) {
+                for (int i = 0; i <= ROWS; ++i) {
+                    delete[] allSeats[m][i];
+                }
+                delete[] allSeats[m];
+            }
+            delete[] allSeats;
             return 0;
 
         case 1:
@@ -53,14 +60,13 @@ int main()
             cout << "\nSelect movie number: ";
             cin >> movieChoice;
             if (movieChoice >= 1 && movieChoice <= MOVIE_COUNT)
-                reserveSeat(allSeats, movieChoice - 1);
+                reserveSeat(allSeats, movieChoice - 1, selectedRow, selectedCol);
             else {
                 cout << "Invalid movie choice.\n";
                 cin.ignore();
                 cin.get();
             }
             break;
-
         case 2:
             clearScreen();
             printLogo();
