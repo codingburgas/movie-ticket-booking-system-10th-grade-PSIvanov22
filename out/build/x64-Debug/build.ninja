@@ -70,6 +70,13 @@ build CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\Reservati
   TARGET_COMPILE_PDB = CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\
   TARGET_PDB = movie-ticket-booking-system-10th-grade-PSIvanov22.pdb
 
+build CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\DatabaseManager.cpp.obj: CXX_COMPILER__movie-ticket-booking-system-10th-grade-PSIvanov22_unscanned_Debug C$:\Users\dimit\OneDrive\Работен$ плот\movie-ticket-booking-system-10th-grade-PSIvanov22\DatabaseManager.cpp || cmake_object_order_depends_target_movie-ticket-booking-system-10th-grade-PSIvanov22
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
+  OBJECT_DIR = CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir
+  OBJECT_FILE_DIR = CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir
+  TARGET_COMPILE_PDB = CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\
+  TARGET_PDB = movie-ticket-booking-system-10th-grade-PSIvanov22.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target movie-ticket-booking-system-10th-grade-PSIvanov22
@@ -78,7 +85,7 @@ build CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\Reservati
 #############################################
 # Link the executable movie-ticket-booking-system-10th-grade-PSIvanov22.exe
 
-build movie-ticket-booking-system-10th-grade-PSIvanov22.exe: CXX_EXECUTABLE_LINKER__movie-ticket-booking-system-10th-grade-PSIvanov22_Debug CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\main.cpp.obj CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\DisplayFunctions.cpp.obj CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\ReservationFunctions.cpp.obj
+build movie-ticket-booking-system-10th-grade-PSIvanov22.exe: CXX_EXECUTABLE_LINKER__movie-ticket-booking-system-10th-grade-PSIvanov22_Debug CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\main.cpp.obj CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\DisplayFunctions.cpp.obj CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\ReservationFunctions.cpp.obj CMakeFiles\movie-ticket-booking-system-10th-grade-PSIvanov22.dir\DatabaseManager.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

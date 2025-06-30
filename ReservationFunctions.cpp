@@ -1,72 +1,50 @@
 #include <iostream>
-#include <iomanip>
+#include <iomanip> // For formatting output (though not explicitly used for fixed/precision here)
 #include <string>
-#include <algorithm>
-#include <cctype>
+#include <algorithm> // For tolower, max
+#include <cctype> // For tolower
+#include <map> // For std::map used in food sales
 #include "SeatManager.h"
+#include "DatabaseManager.h"
 
 using namespace std;
 
-int vipCount[MOVIE_COUNT] = {};
-int premiumCount[MOVIE_COUNT] = {};
-int commonCount[MOVIE_COUNT] = {};
-int totalRevenue[MOVIE_COUNT] = {};
-int popcornSold[MOVIE_COUNT] = {};
-int sodaSold[MOVIE_COUNT] = {};
-int candySold[MOVIE_COUNT] = {};
+extern const char* movieTitles[MOVIE_COUNT];
+extern const char* movieTimes[MOVIE_COUNT];
 
-const char* movieTitles[MOVIE_COUNT] = {
-    "The Matrix", "Inception", "Interstellar", "The Godfather",
-    "Pulp Fiction", "Avatar", "Avengers: Endgame", "Toy Story"
-};
-const char* movieTimes[MOVIE_COUNT] = {
-    "14:00", "16:00", "18:00", "20:00",
-    "22:00", "13:00", "17:00", "11:00"
-};
-
-void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col)
+void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col) // row and col passed by reference
 {
     clearScreen();
     printLogo();
 
-    int** seats = allSeats[movieIndex];
+    int** seats = allSeats[movieIndex]; // Get seats for the current movie
 
     cout << "Movie: " << movieTitles[movieIndex] << " at " << movieTimes[movieIndex] << "\n";
-    displaySeatingMap(seats);
+    displaySeatingMap(seats); // Show the seating map for the selected movie
     cout << "\n============PRICES===========" << endl;
     cout << "Rows 1 to 3: $50.00 (VIP)\nRows 4 to 7: $30.00 (Premium)\nRows 8 to 10: $15.00 (Common)";
     cout << "\n\nWhich row would you like to reserve?: ";
-    cin >> row;
+    cin >> row; // Get row input
     cout << "Which column would you like to reserve?: ";
-    cin >> col;
+    cin >> col; // Get column input
+
     if (row >= 1 && row <= ROWS &&
-        col >= 1 && col <= COLS)
+        col >= 1 && col <= COLS) // Check if input is within valid range
     {
-        if (seats[row][col] == 0)
+        if (seats[row][col] == 0) // Check if seat is available (0 for available)
         {
-            seats[row][col] = 1;
+            seats[row][col] = 1; // Mark seat as reserved (1 for reserved)
+            DBManager::saveSeatState(movieIndex, row, col, 1); // Save seat state to DB
+
             clearScreen();
             printLogo();
             cout << "============RESERVATION===========" << endl;
             cout << "\nSeat successfully reserved!\n\n";
 
-            if (row <= 3) {
-                vipCount[movieIndex]++;
-                totalRevenue[movieIndex] += 50;
-            }
-            else if (row <= 7) {
-                premiumCount[movieIndex]++;
-                totalRevenue[movieIndex] += 30;
-            }
-            else {
-                commonCount[movieIndex]++;
-                totalRevenue[movieIndex] += 15;
-            }
-
             char buyFoodChoice;
             cout << "\nWould you like to purchase any food/drinks? (y/n): ";
             cin >> buyFoodChoice;
-            cin.ignore();
+            cin.ignore(); // Consume the newline character left by cin >> buyFoodChoice
 
             if (tolower(buyFoodChoice) == 'y') {
                 char addMoreFood = 'y';
@@ -80,7 +58,7 @@ void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col)
                     cout << "Select an item: ";
 
                     int itemChoice;
-                    cin >> itemChoice;
+                    cin >> itemChoice; // Get food item choice
 
                     int foodPrice = 0;
                     string foodName;
@@ -101,21 +79,15 @@ void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col)
                         break;
                     default:
                         cout << "Invalid food choice. No food added for this selection.\n";
-                        foodPrice = 0;
+                        foodPrice = 0; // Reset price if invalid choice
                     }
 
-                    if (foodPrice > 0) {
+                    if (foodPrice > 0) { // If a valid food item was chosen
                         cout << "How many portions of " << foodName << " would you like?: ";
-                        cin >> quantity;
+                        cin >> quantity; // Get quantity
                         if (quantity > 0) {
-                            totalRevenue[movieIndex] += (foodPrice * quantity);
+                            DBManager::saveFoodSale(movieIndex, foodName, quantity, foodPrice); // Save food sale to DB
                             cout << quantity << " " << foodName << "(s) added. Cost: $" << (foodPrice * quantity) << ".\n";
-
-                            switch (itemChoice) {
-                            case 1: popcornSold[movieIndex] += quantity; break;
-                            case 2: sodaSold[movieIndex] += quantity; break;
-                            case 3: candySold[movieIndex] += quantity; break;
-                            }
                         }
                         else {
                             cout << "Invalid quantity. No food added for this selection.\n";
@@ -124,18 +96,18 @@ void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col)
 
                     cout << "\nWould you like to add more food/drinks? (y/n): ";
                     cin >> addMoreFood;
-                    cin.ignore();
+                    cin.ignore(); // Consume the newline
                 }
             }
         }
-        else
+        else // Seat is already taken
         {
             clearScreen();
             printLogo();
             cout << "Seat is already taken!\n";
         }
     }
-    else
+    else // Invalid coordinates
     {
         clearScreen();
         printLogo();
@@ -143,13 +115,13 @@ void reserveSeat(int*** allSeats, int movieIndex, int& row, int& col)
     }
 
     cout << "\nPress ENTER to continue...";
-    cin.get();
+    cin.get(); // Wait for user to press enter
 }
 
 void showRevenue(int movieIndex)
 {
-    clearScreen(); // Добавено, за да изчисти екрана преди да покаже доклада
-    printLogo();   // Добавено, за да покаже логото
+    clearScreen();
+    printLogo();
 
     const int CONSOLE_WIDTH = 80;
     string reportTitle = "============ REVENUE REPORT ============";
@@ -159,36 +131,48 @@ void showRevenue(int movieIndex)
     cout << string(titlePadding, ' ') << reportTitle << "\n";
     cout << "\n";
 
-    // Центриране на информацията за филма
     string movieInfo = "Movie: " + string(movieTitles[movieIndex]) + " at " + string(movieTimes[movieIndex]);
     int movieInfoPadding = max(0, (CONSOLE_WIDTH - (int)movieInfo.length()) / 2);
     cout << string(movieInfoPadding, ' ') << movieInfo << "\n\n";
 
-    // Центриране на категориите за места
-    int categoryIndent = 25; // Отстъп, за да съответства на опциите от главното меню
-    cout << string(categoryIndent, ' ') << "VIP seats reserved: " << vipCount[movieIndex] << endl;
-    cout << string(categoryIndent, ' ') << "Premium seats reserved: " << premiumCount[movieIndex] << endl;
-    cout << string(categoryIndent, ' ') << "Common seats reserved: " << commonCount[movieIndex] << endl;
-    cout << string(categoryIndent, ' ') << "\n--- Food and Drinks Sales ---\n";
+    int categoryIndent = 25;
 
-    if (popcornSold[movieIndex] > 0) {
-        string popcornText = "Popcorn: " + to_string(popcornSold[movieIndex]) + " x $10 = $" + to_string(popcornSold[movieIndex] * 10);
-        cout << string(categoryIndent, ' ') << popcornText << endl;
+    int vipSeats, premiumSeats, commonSeats;
+    DBManager::getSeatCounts(movieIndex, vipSeats, premiumSeats, commonSeats); // Get seat counts from DB
+
+    cout << string(categoryIndent, ' ') << "VIP seats reserved: " << vipSeats << endl;
+    cout << string(categoryIndent, ' ') << "Premium seats reserved: " << premiumSeats << endl;
+    cout << string(categoryIndent, ' ') << "Common seats reserved: " << commonSeats << endl;
+
+    cout << "\n";
+
+    string foodHeader = "--- Food and Drinks Sales ---";
+    int foodHeaderPadding = max(0, (CONSOLE_WIDTH - (int)foodHeader.length()) / 2);
+    cout << string(foodHeaderPadding, ' ') << foodHeader << "\n";
+
+    map<string, int> foodSales = DBManager::getFoodSales(movieIndex); // Get food sales from DB
+
+    bool anyFoodSold = false;
+    // Display food sales if any
+    if (foodSales.count("Popcorn") > 0 && foodSales["Popcorn"] > 0) {
+        cout << string(categoryIndent, ' ') << "Popcorn: " << foodSales["Popcorn"] << " x $10 = $" << (foodSales["Popcorn"] * 10) << endl;
+        anyFoodSold = true;
     }
-    if (sodaSold[movieIndex] > 0) {
-        string sodaText = "Soda: " + to_string(sodaSold[movieIndex]) + " x $5 = $" + to_string(sodaSold[movieIndex] * 5);
-        cout << string(categoryIndent, ' ') << sodaText << endl;
+    if (foodSales.count("Soda") > 0 && foodSales["Soda"] > 0) {
+        cout << string(categoryIndent, ' ') << "Soda: " << foodSales["Soda"] << " x $5 = $" << (foodSales["Soda"] * 5) << endl;
+        anyFoodSold = true;
     }
-    if (candySold[movieIndex] > 0) {
-        string candyText = "Candy: " + to_string(candySold[movieIndex]) + " x $7 = $" + to_string(candySold[movieIndex] * 7);
-        cout << string(categoryIndent, ' ') << candyText << endl;
+    if (foodSales.count("Candy") > 0 && foodSales["Candy"] > 0) {
+        cout << string(categoryIndent, ' ') << "Candy: " << foodSales["Candy"] << " x $7 = $" << (foodSales["Candy"] * 7) << endl;
+        anyFoodSold = true;
     }
-    if (popcornSold[movieIndex] == 0 && sodaSold[movieIndex] == 0 && candySold[movieIndex] == 0) {
+    if (!anyFoodSold) {
         cout << string(categoryIndent, ' ') << "No food or drinks sold for this movie.\n";
     }
 
     cout << "\n";
-    string totalRevenueText = "Total revenue: $" + to_string(totalRevenue[movieIndex]);
+    int totalRev = DBManager::calculateTotalRevenue(movieIndex); // Calculate total revenue from DB
+    string totalRevenueText = "Total revenue: $" + to_string(totalRev);
     int totalRevenuePadding = max(0, (CONSOLE_WIDTH - (int)totalRevenueText.length()) / 2);
     cout << string(totalRevenuePadding, ' ') << totalRevenueText << endl;
 }
