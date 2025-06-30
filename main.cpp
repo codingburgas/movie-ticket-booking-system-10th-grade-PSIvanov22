@@ -42,12 +42,12 @@ int main()
         int menuPadding = max(0, (CONSOLE_WIDTH - (int)menuTitle.length()) / 2);
         cout << string(menuPadding, ' ') << menuTitle << "\n";
 
-        int optionPadding = menuPadding + 4;
-        cout << string(optionPadding, ' ') << "0 - Exit Program\n";
-        cout << string(optionPadding, ' ') << "1 - Reserve Seat\n";
-        cout << string(optionPadding, ' ') << "2 - Show Seating Map\n";
-        cout << string(optionPadding, ' ') << "3 - Show Revenue\n";
-        cout << string(optionPadding, ' ') << "Select an option: ";
+        int optionIndent = 25; // Променено разстояние за опциите
+        cout << string(optionIndent, ' ') << "0 - Exit Program\n";
+        cout << string(optionIndent, ' ') << "1 - Reserve Seat\n";
+        cout << string(optionIndent, ' ') << "2 - Show Seating Map\n";
+        cout << string(optionIndent, ' ') << "3 - Show Revenue\n";
+        cout << string(optionIndent, ' ') << "Select an option: ";
         cin >> userChoice;
 
         switch (userChoice)

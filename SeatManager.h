@@ -9,6 +9,10 @@ extern int vipCount[MOVIE_COUNT];
 extern int premiumCount[MOVIE_COUNT];
 extern int commonCount[MOVIE_COUNT];
 extern int totalRevenue[MOVIE_COUNT];
+extern int popcornSold[MOVIE_COUNT];
+extern int sodaSold[MOVIE_COUNT];
+extern int candySold[MOVIE_COUNT];
+
 extern const char* movieTitles[MOVIE_COUNT];
 extern const char* movieTimes[MOVIE_COUNT];
 
